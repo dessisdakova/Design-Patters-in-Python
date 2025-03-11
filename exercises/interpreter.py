@@ -6,10 +6,16 @@ import re
 
 
 class ExpressionProcessor:
+    """
+    Interpreter Pattern: Processes arithmetic expressions with variables.
+    Parses and evaluates expressions using a simple interpreter.
+    """
     def __init__(self):
+        """Initializes the processor with a dictionary of variables."""
         self.variables = {}
 
     def calculate(self, expression: str):
+        """Calculates the value of the given expression."""
         # get all valid characters by one
         valid_chars = []
         operants = []
@@ -50,7 +56,7 @@ class ExpressionProcessor:
 if __name__ == '__main__':
     ep = ExpressionProcessor()
     ep.variables["a"] = 2
-    print(ep.calculate("13+1-9a"))
-    print(ep.calculate("13+1-a"))
-    print(ep.calculate("1+1-a+"))
-    print(ep.calculate("13+1-x"))
+    print(ep.calculate("13+1-9a")) # Output: -4
+    print(ep.calculate("13+1-a")) # Output: 12
+    print(ep.calculate("1+1-a+")) # Output: 0
+    print(ep.calculate("13+1-x")) # Output: 0

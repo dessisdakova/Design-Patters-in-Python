@@ -4,10 +4,12 @@
 from random import randint
 
 class Generator:
+    """Generates a list of random integers."""
     def generate(self, count):
         return [randint(1,9) for x in range(count)]
 
 class Splitter:
+    """Splits a 2D array into rows, columns, and diagonals."""
     def split(self, array):
         result = []
 
@@ -43,6 +45,7 @@ class Splitter:
         return result
 
 class Verifier:
+    """Verifies if the sums of all rows, columns, and diagonals are equal."""
     def verify(self, arrays):
         first = sum(arrays[0])
 
@@ -53,7 +56,12 @@ class Verifier:
         return True
 
 class MagicSquareGenerator:
+    """
+    Facade Pattern: Provides a simplified interface for generating magic squares.
+    Hides the complexity of generating, splitting, and verifying.
+    """
     def generate(self, size):
+        """Generates a magic square of the given size."""
         generator = Generator()
         splitter = Splitter()
         verifier = Verifier()

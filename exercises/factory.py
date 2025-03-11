@@ -11,10 +11,16 @@ class Person:
 
 
 class PersonFactory:
+    """
+    Factory Pattern: Creates Person objects with sequential IDs.
+    Encapsulates the object creation logic.
+    """
     def __init__(self):
+        """Initializes the factory with an index counter."""
         self.index = 0  # Instance-level index
 
     def create_person(self, name):
+        """Creates a Person object with a unique ID."""
         person = Person(self.index, name)
         self.index += 1
         return person
@@ -22,5 +28,5 @@ class PersonFactory:
 
 if __name__ == '__main__':
     pf = PersonFactory()
-    print(pf.create_person("John"))
-    print(pf.create_person("Kate"))
+    print(pf.create_person("John")) # Output: Person with ID 0 is John
+    print(pf.create_person("Kate")) # Output: Person with ID 1 is Kate

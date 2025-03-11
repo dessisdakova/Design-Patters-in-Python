@@ -7,19 +7,28 @@ from collections.abc import Iterable
 
 
 class Summable(ABC, Iterable):
-    """The interface to uniform."""
+    """
+    Composite Pattern: Component interface.
+    Defines the common interface for both individual objects and composites.
+    """
     @property
     @abstractmethod
     def sum(self):
+        """Calculates the sum of the object."""
         pass
 
 class SingleValue(Summable):
-    """The individual object."""
+    """
+    Composite Pattern: Leaf node.
+    Represents an individual object with a single value.
+    """
     @property
     def sum(self):
+        """Returns the value itself as the sum."""
         return self.value
 
     def __init__(self, value):
+        """Initializes the SingleValue with a value."""
         self.value = value
 
     def __iter__(self):
@@ -27,14 +36,19 @@ class SingleValue(Summable):
         yield self
 
 class ManyValues(list, Summable):
-    """The composition - a box of individual objects."""
+    """
+    Composite Pattern: Composite node.
+    Represents a collection of Summable objects.
+    """
     def append(self, item):
+        """Adds a Summable object to the collection."""
         if not isinstance(item, Summable):
             item = SingleValue(item)
         super().append(item)
 
     @property
     def sum(self):
+        """Calculates the sum of all objects in the collection."""
         total = 0
         for x in self:
             total += x.sum
@@ -50,4 +64,4 @@ if __name__ == '__main__':
     all_values = ManyValues()
     all_values.append(single_value)
     all_values.append(other_values)
-    print(all_values.sum)
+    print(all_values.sum) # Output: 66
